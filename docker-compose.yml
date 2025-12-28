@@ -1,0 +1,14 @@
+services:
+  java-service:
+    build: ./java
+    container_name: java-cpu-service
+    ports:
+      - "8080:8080"
+
+  node-service:
+    build: ./node
+    container_name: node-api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - java-service

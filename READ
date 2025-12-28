@@ -1,0 +1,203 @@
+Project Title
+
+Document Analytics & Processing Platform
+
+Real-World Problem
+
+Companies receive large numbers of documents:
+
+Bank statements
+
+Invoices
+
+PDFs
+
+CSV reports
+
+They need to:
+
+Process them quickly
+
+Extract analytics
+
+Keep APIs responsive
+
+Node.js alone struggles with heavy processing. This is a very common real-world use case.
+
+High-Level Architecture
+Client
+  ↓
+Node.js API Gateway (Auth, validation, routing)
+  ↓
+Java Processing Service (CPU-heavy work)
+  ↓
+Result returned
+
+
+Dockerized using Docker Compose.
+
+Services Breakdown
+1️⃣ Node.js – API Gateway (I/O Heavy)
+
+Responsibilities
+
+Accept file uploads
+
+Validate input
+
+Store files temporarily
+
+Call Java service
+
+Return response
+
+Why Node.js
+
+Non-blocking I/O
+
+Fast request handling
+
+Ideal API gateway
+
+2️⃣ Java – Document Processing Service (CPU Heavy)
+
+Responsibilities
+
+Parse large documents
+
+Perform computations
+
+Generate analytics
+
+Use multi-threading
+
+Why Java
+
+True parallelism
+
+Thread pools
+
+High CPU efficiency
+
+Core Use Case (What You Build)
+Feature: Large CSV Analytics
+
+Upload a CSV file (1–2 GB in real systems, small for practice) and return:
+
+Total number of rows
+
+Sum of a numeric column
+
+Average
+
+Min / Max
+
+Processing time
+
+User Flow
+
+User uploads CSV via Node.js API
+
+Node streams file to Java service
+
+Java processes CSV using multiple threads
+
+Java returns analytics
+
+Node returns JSON response
+
+API Design
+Node.js Endpoint
+POST /upload
+
+Java Endpoint
+POST /process
+
+Hands-On Tasks (Step-By-Step Roadmap)
+Phase 1: Node.js (Gateway)
+
+Create Express server
+
+Handle file upload using streams
+
+Forward file to Java service
+
+Return JSON response
+
+Skills Learned
+
+Streaming
+
+API Gateway pattern
+
+Non-blocking I/O
+
+Phase 2: Java (CPU Service)
+
+Read CSV line by line
+
+Split work across threads
+
+Aggregate results
+
+Return analytics
+
+Skills Learned
+
+ExecutorService
+
+Thread pools
+
+CPU-bound optimization
+
+Phase 3: Docker
+
+Dockerfile for Node
+
+Dockerfile for Java
+
+Docker Compose networking
+
+Resource limits (CPU, memory)
+
+Skills Learned
+
+Multi-container systems
+
+Service discovery
+
+Environment isolation
+
+Phase 4: Microservices Concepts
+
+Service separation
+
+Independent scaling
+
+Failure isolation
+
+Inter-service communication
+
+Sample Output (JSON)
+{
+  "rows": 5000000,
+  "sum": 1234567890,
+  "average": 246.9,
+  "min": 1,
+  "max": 999,
+  "processingTimeMs": 842
+}
+
+Why This Project Is Real-World Relevant
+
+This exact pattern is used in:
+
+Banking systems
+
+Reporting engines
+
+ETL pipelines
+
+Analytics platforms
+
+FinTech backends
