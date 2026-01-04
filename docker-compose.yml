@@ -12,3 +12,11 @@ services:
       - "3000:3000"
     depends_on:
       - java-service
+
+  angular-ui:
+    build: ./angular-ui
+    container_name: angular-ui
+    ports:
+      - "4200:80"
+    depends_on:
+      - node-service
